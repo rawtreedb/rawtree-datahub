@@ -1,0 +1,23 @@
+source:
+  type: rawtree
+  config:
+    base_url: https://api.rawtree.com
+    api_key: ${RAWTREE_API_KEY}
+    platform_instance: acme-production
+    database_pattern:
+      allow:
+        - ^analytics$
+    table_pattern:
+      deny:
+        - ^analytics\.temporary_
+    stateful_ingestion:
+      enabled: true
+      remove_stale_metadata: true
+
+sink:
+  type: datahub-rest
+  config:
+    server: ${DATAHUB_GMS_URL}
+    token: ${DATAHUB_TOKEN}
+
+pipeline_name: rawtree-acme-production

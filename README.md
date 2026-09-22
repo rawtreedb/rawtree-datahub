@@ -115,6 +115,18 @@ uv run mypy
 The source is registered through the
 `datahub.ingestion.source.plugins` entry-point group under the alias `rawtree`.
 
+The default test suite includes a recipe-level integration test using DataHub's
+real pipeline and file sink against a disposable RawTree API fixture. To also
+validate ingestion, schema refresh, governance preservation, partial-failure
+safety, and stale deletion against a disposable DataHub service, run:
+
+```bash
+bash scripts/test-datahub-e2e.sh
+```
+
+The script reuses `DATAHUB_E2E_GMS_URL` when set. Otherwise it starts a local
+DataHub quickstart and stops only the stack that it started.
+
 ## License
 
 Apache License 2.0.

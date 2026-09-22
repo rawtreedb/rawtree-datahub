@@ -49,6 +49,9 @@ packages = ["src/rawtree_datahub"]
 [tool.pytest.ini_options]
 addopts = "-ra --strict-markers"
 testpaths = ["tests"]
+markers = [
+  "datahub_e2e: requires a running DataHub GMS instance",
+]
 
 [tool.ruff]
 target-version = "py310"

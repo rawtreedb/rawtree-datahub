@@ -27,4 +27,5 @@ jobs:
       - run: uv run mypy src
       - run: uv build
       - name: Verify DataHub plugin registration
-        run: uv run datahub check plugins | grep -Eq '^rawtree[[:space:]]'
+        run: |
+          uv run python -c "from importlib.metadata import entry_points; plugins = {entry.name: entry for entry in entry_points(group='datahub.ingestion.source.plugins')}; assert plugins['rawtree'].load().__name__ == 'RawTreeSource'"
